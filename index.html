@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Futugora - The Future is Now</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <div class="brand-container">
+                <span class="brand-part futu" id="futu">FUTU</span>
+                <span class="brand-part gora" id="gora">GORA</span>
+            </div>
+            <p class="tagline" id="tagline">The future is now</p>
+        </div>
+        <div class="scroll-indicator" id="scrollIndicator">
+            <div class="scroll-arrow">
+                <svg viewBox="0 0 24 24">
+                    <path d="M7 10L12 15L17 10" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sticky Header (appears after scroll) -->
+    <header class="sticky-header" id="stickyHeader">
+        <h1 class="sticky-brand">FUTUGORA</h1>
+        <p class="sticky-tagline">The future is now.</p>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Product Card -->
+        <section class="product-section">
+            <div class="product-card" id="productCard">
+                <h2 class="product-title">Spoiless</h2>
+                <p class="product-description">
+                    Finally, a place to discuss your favorite shows that makes it impossible for spoilers to meet your eye.
+                </p>
+                <div class="button-group">
+                    <a href="https://app.futugora.net/spoiless/" class="launch-button">
+                        🚀 LAUNCH APP
+                    </a>
+                    <a href="https://github.com/futugora/spoiless" class="source-button">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+                        </svg>
+                        CHECK SOURCE
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Email Signup Card -->
+        <section class="signup-section">
+            <div class="signup-card" id="signupCard">
+                <h2 class="signup-title">What's next?</h2>
+                <p class="signup-description">
+                    Give us your best email and you'll be the first to know when our next big thing comes out!
+                </p>
+                
+                <!-- ConvertKit Form -->
+                <form action="https://app.convertkit.com/forms/8145235/subscriptions" method="post" class="convertkit-form" id="ck-form">
+                    <div class="email-input-container">
+                        <input type="email" name="email_address" placeholder="Enter your email" class="email-input" required>
+                        <button type="submit" class="signup-button">SIGN UP</button>
+                    </div>
+                    <div class="form-status" id="form-status"></div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Spacer for scroll effect -->
+        <div class="spacer"></div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <nav class="footer-nav">
+            <a href="contact.html" class="footer-link">Contact</a>
+        </nav>
+        <p class="copyright">© 2025 Futugora</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
