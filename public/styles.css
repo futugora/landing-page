@@ -111,11 +111,10 @@ body {
 }
 
 .product-section {
-    padding: 6rem 2rem;
+    padding: 4rem 2rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 100vh;
 }
 
 .product-card {
@@ -308,11 +307,10 @@ body {
 
 /* Signup Section */
 .signup-section {
-    padding: 6rem 2rem;
+    padding: 4rem 2rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 100vh;
 }
 
 .signup-card {
@@ -517,4 +515,36 @@ body {
         max-width: 250px;
         justify-content: center;
     }
+}
+
+/* KeyBard Product Card Additions */
+.app-store-button {
+    display: inline-block;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.app-store-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.app-store-button img {
+    height: 56px; /* Standard height for the badge */
+    width: auto;
+}
+
+.privacy-link-container {
+    margin-top: 2rem;
+}
+
+.privacy-link {
+    font-size: 0.9rem;
+    color: #888;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.privacy-link:hover {
+    color: #ffffff;
+    text-decoration: underline;
 }

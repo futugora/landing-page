@@ -7,8 +7,7 @@ class ScrollAnimationController {
             gora: document.getElementById('gora'),
             tagline: document.getElementById('tagline'),
             stickyHeader: document.getElementById('stickyHeader'),
-            productCard: document.getElementById('productCard'),
-            signupCard: document.getElementById('signupCard'),
+            observedSections: document.querySelectorAll('.observed-section'),
             scrollIndicator: document.getElementById('scrollIndicator'),
             brandContainer: document.querySelector('.brand-container')
         };
@@ -41,21 +40,22 @@ class ScrollAnimationController {
         const cardObserver = new IntersectionObserver(
             (entries) => {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
+                    const card = entry.target.querySelector('.product-card, .signup-card');
+                    if (card) {
+                        if (entry.isIntersecting) {
+                            card.classList.add('visible');
+                        } else {
+                            card.classList.remove('visible');
+                        }
                     }
                 });
             },
             { threshold: 0.3 }
         );
 
-        if (this.elements.productCard) {
-            cardObserver.observe(this.elements.productCard);
-        }
-        
-        if (this.elements.signupCard) {
-            cardObserver.observe(this.elements.signupCard);
-        }
+        this.elements.observedSections.forEach(section => {
+            cardObserver.observe(section);
+        });
     }
 
     onScroll() {
@@ -203,6 +203,59 @@ class ConvertKitFormHandler {
     }
 }
 
+// Contact Form Handler
+class ContactFormHandler {
+    constructor() {
+        this.subjectSelect = document.getElementById('subject-select');
+        this.subjectText = document.getElementById('subject-text');
+        this.form = this.subjectSelect ? this.subjectSelect.closest('form') : null;
+        this.init();
+    }
+
+    init() {
+        if (!this.subjectSelect || !this.subjectText || !this.form) return;
+        
+        this.subjectSelect.addEventListener('change', this.handleSubjectChange.bind(this));
+        this.handleURLParameters();
+        this.form.addEventListener('submit', this.prepareSubmission.bind(this));
+    }
+
+    handleSubjectChange() {
+        if (this.subjectSelect.value === 'Other') {
+            this.subjectSelect.style.display = 'none';
+            this.subjectSelect.removeAttribute('required');
+            this.subjectText.style.display = 'block';
+            this.subjectText.setAttribute('required', '');
+            this.subjectText.focus();
+        }
+    }
+
+    handleURLParameters() {
+        const params = new URLSearchParams(window.location.search);
+        const subject = params.get('subject');
+        
+        if (subject) {
+            const subjectLower = subject.toLowerCase();
+            const option = Array.from(this.subjectSelect.options).find(opt => opt.value.toLowerCase() === subjectLower);
+            
+            if (option) {
+                this.subjectSelect.value = option.value;
+            }
+        }
+    }
+    
+    prepareSubmission() {
+        if (this.subjectSelect.value !== 'Other') {
+            // If "Other" is not selected, ensure the text input is not part of the submission
+            this.subjectText.removeAttribute('name');
+        } else {
+            // If "Other" is selected, rename the text input to be the main subject
+            this.subjectSelect.removeAttribute('name');
+            this.subjectText.setAttribute('name', 'subject');
+        }
+    }
+}
+
 // Initialize smooth scrolling and animations
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize scroll animation controller
@@ -229,6 +282,9 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Initialize ConvertKit form handler
     new ConvertKitFormHandler();
+    
+    // Initialize Contact Form handler
+    new ContactFormHandler();
 });
 
 // Performance optimization: Reduce motion for users who prefer it
