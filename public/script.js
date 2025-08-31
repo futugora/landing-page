@@ -15,6 +15,9 @@ class ScrollAnimationController {
         this.scrollProgress = 0;
         this.isAnimating = false;
         
+        // Abort if not on the main page
+        if (!this.elements.hero) return;
+
         this.init();
     }
 
@@ -258,8 +261,10 @@ class ContactFormHandler {
 
 // Initialize smooth scrolling and animations
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize scroll animation controller
-    const scrollController = new ScrollAnimationController();
+    // Initialize scroll animation controller only on the main page
+    if (document.body.classList.contains('home-page')) {
+        new ScrollAnimationController();
+    }
     
     // Add loading animation
     setTimeout(() => {
@@ -285,7 +290,210 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Initialize Contact Form handler
     new ContactFormHandler();
+
+    // Initialize KeyBard Product Page Demo if on the correct page
+    if (document.body.classList.contains('product-page-body')) {
+        new KeyBardDemoHandler();
+    }
 });
+
+// KeyBard Product Page Interactive Demo Handler
+class KeyBardDemoHandler {
+    constructor() {
+        this.elements = {
+            icon: document.getElementById('keybard-demo-icon'),
+            mainMenu: document.getElementById('keybard-main-menu'),
+            demoPlugin: document.getElementById('demo-plugin'),
+            presetsMenu: document.getElementById('presets-submenu'),
+            liveClock: document.getElementById('live-clock'),
+            pianoKeys: document.querySelectorAll('.piano-key')
+        };
+        
+        this.audioContext = null;
+        this.oscillators = {}; // Store oscillators by note
+        this.submenuTimeout = null;
+        this.currentWaveform = 'sine'; // Default waveform
+        this.noteFrequencies = {
+            'C4': 261.63, 'C#4': 277.18, 'D4': 293.66, 'D#4': 311.13, 'E4': 329.63,
+            'F4': 349.23, 'F#4': 369.99, 'G4': 392.00, 'G#4': 415.30, 'A4': 440.00,
+            'A#4': 466.16, 'B4': 493.88, 'C5': 523.25
+        };
+
+        this.init();
+    }
+
+    init() {
+        // The check in the DOMContentLoaded ensures elements exist
+        this.initClock();
+        this.bindMenuEvents();
+        this.bindPianoEvents();
+        this.bindPresetEvents();
+        this.bindKeyboardEvents(); // Add this line
+
+        // Start with menus open for the demo
+        this.elements.mainMenu.classList.add('visible');
+        this.elements.presetsMenu.classList.add('visible');
+    }
+
+    initClock() {
+        const updateClock = () => {
+            const now = new Date();
+            const options = { weekday: 'short', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+            this.elements.liveClock.textContent = now.toLocaleDateString('en-US', options).replace(',', '');
+        };
+        updateClock();
+        setInterval(updateClock, 1000);
+    }
+
+    bindMenuEvents() {
+        this.elements.icon.addEventListener('click', (e) => {
+            e.stopPropagation();
+            this.toggleMenu(this.elements.mainMenu);
+        });
+
+        this.elements.demoPlugin.addEventListener('mouseover', () => {
+            clearTimeout(this.submenuTimeout);
+            if (this.elements.mainMenu.classList.contains('visible')) {
+                this.elements.presetsMenu.classList.add('visible');
+            }
+        });
+
+        const hideSubmenu = () => {
+            this.submenuTimeout = setTimeout(() => {
+                this.elements.presetsMenu.classList.remove('visible');
+            }, 200); // 200ms delay
+        };
+
+        this.elements.demoPlugin.addEventListener('mouseout', hideSubmenu);
+        this.elements.presetsMenu.addEventListener('mouseover', () => clearTimeout(this.submenuTimeout));
+        this.elements.presetsMenu.addEventListener('mouseout', hideSubmenu);
+
+        document.addEventListener('click', () => {
+            this.elements.mainMenu.classList.remove('visible');
+            this.elements.presetsMenu.classList.remove('visible');
+        });
+
+        // Prevent menu clicks from closing the menu
+        this.elements.mainMenu.addEventListener('click', e => e.stopPropagation());
+        this.elements.presetsMenu.addEventListener('click', e => e.stopPropagation());
+    }
+
+    bindKeyboardEvents() {
+        this.keyMap = {};
+        this.elements.pianoKeys.forEach(key => {
+            const keyName = key.dataset.key;
+            if (keyName) {
+                this.keyMap[keyName] = key;
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            const keyName = e.key.toLowerCase();
+            const keyElement = this.keyMap[keyName];
+            if (keyElement && !keyElement.classList.contains('playing')) {
+                this.playNote(keyElement);
+            }
+        });
+
+        document.addEventListener('keyup', (e) => {
+            const keyName = e.key.toLowerCase();
+            const keyElement = this.keyMap[keyName];
+            if (keyElement) {
+                this.stopNote(keyElement);
+            }
+        });
+    }
+
+    bindPresetEvents() {
+        const presets = this.elements.presetsMenu.querySelectorAll('.menu-item');
+        presets.forEach(preset => {
+            preset.addEventListener('click', () => {
+                // Update visual selection
+                presets.forEach(p => p.classList.remove('selected'));
+                preset.classList.add('selected');
+
+                // Change waveform
+                const newWaveform = preset.textContent.toLowerCase();
+                this.currentWaveform = newWaveform;
+
+                // Close menus after selection
+                this.elements.mainMenu.classList.remove('visible');
+                this.elements.presetsMenu.classList.remove('visible');
+            });
+        });
+    }
+
+    toggleMenu(menu) {
+        const isVisible = menu.classList.contains('visible');
+        // Always close submenus when toggling the main
+        this.elements.presetsMenu.classList.remove('visible');
+        if (isVisible) {
+            menu.classList.remove('visible');
+        } else {
+            // Close other menus before opening
+            this.elements.mainMenu.classList.remove('visible');
+            menu.classList.add('visible');
+        }
+    }
+
+    bindPianoEvents() {
+        const piano = document.querySelector('.interactive-piano');
+        if (!piano) return;
+
+        this.elements.pianoKeys.forEach(key => {
+            key.addEventListener('mousedown', () => this.playNote(key));
+            key.addEventListener('mouseup', () => this.stopNote(key));
+            key.addEventListener('mouseleave', () => this.stopNote(key));
+            key.addEventListener('touchstart', (e) => { e.preventDefault(); this.playNote(key); }, { passive: false });
+            key.addEventListener('touchend', (e) => { e.preventDefault(); this.stopNote(key); }, { passive: false });
+        });
+    }
+
+    initAudio() {
+        if (!this.audioContext) {
+            this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        // Resume audio context if it's in a suspended state (required by modern browsers)
+        if (this.audioContext.state === 'suspended') {
+            this.audioContext.resume();
+        }
+    }
+
+    playNote(key) {
+        // Initialize audio on the first interaction (click or keypress)
+        this.initAudio();
+        
+        const note = key.dataset.note;
+        if (!note || this.oscillators[note] || !this.audioContext) return;
+
+        const oscillator = this.audioContext.createOscillator();
+        const gainNode = this.audioContext.createGain();
+
+        oscillator.type = this.currentWaveform;
+        oscillator.frequency.setValueAtTime(this.noteFrequencies[note], this.audioContext.currentTime);
+
+        gainNode.gain.setValueAtTime(0, this.audioContext.currentTime);
+        gainNode.gain.linearRampToValueAtTime(0.5, this.audioContext.currentTime + 0.01);
+
+        oscillator.connect(gainNode);
+        gainNode.connect(this.audioContext.destination);
+        
+        oscillator.start();
+        this.oscillators[note] = { oscillator, gainNode };
+        key.classList.add('playing');
+    }
+
+    stopNote(key) {
+        const note = key.dataset.note;
+        if (this.oscillators[note]) {
+            const { oscillator, gainNode } = this.oscillators[note];
+            gainNode.gain.linearRampToValueAtTime(0, this.audioContext.currentTime + 0.1);
+            oscillator.stop(this.audioContext.currentTime + 0.1);
+            delete this.oscillators[note];
+            key.classList.remove('playing');
+        }
+    }
+}
 
 // Performance optimization: Reduce motion for users who prefer it
 if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {

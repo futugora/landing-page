@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KeyBard - The Ultimate MIDI Utility for macOS</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600&display=swap" rel="stylesheet">
+</head>
+<body class="product-page-body">
+    <!-- Sticky Header -->
+    <header class="sticky-header" style="position: fixed; top: 0; opacity: 1; transform: translateY(0);">
+        <h1 class="sticky-brand">FUTUGORA</h1>
+        <p class="sticky-tagline">The future is now.</p>
+    </header>
+
+    <main class="product-page-main">
+        <!-- Hero Section -->
+        <section class="product-hero">
+            <div class="product-hero-content">
+                <h1 class="product-hero-title">KeyBard</h1>
+                <p class="product-hero-subtitle">The lightning-fast, menu bar utility that puts all your MIDI instruments just a click away.</p>
+                <div class="product-hero-cta">
+                    <a href="#" class="app-store-button-large">
+                        <img src="../../img/download-on-the-app-store.svg" alt="Download on the App Store">
+                    </a>
+                    <p class="product-hero-price">One-time purchase of $2.99 (R$4,90 in Brazil)</p>
+                </div>
+            </div>
+            <div class="product-hero-visual">
+                <div class="interactive-demo-container">
+                    <!-- macOS Screen Mockup -->
+                    <div class="macos-screen">
+                        <!-- macOS Menu Bar -->
+                        <div class="macos-menu-bar">
+                            <img src="img/menubar-icon.png" alt="KeyBard Menu Bar Icon" id="keybard-demo-icon">
+                            <div class="live-clock" id="live-clock"></div>
+                        </div>
+
+                        <!-- KeyBard Dropdown Menu -->
+                        <div class="keybard-menu" id="keybard-main-menu">
+                            <div class="menu-item-group">
+                                <div class="menu-item-header">Plugins by ACME</div>
+                                <div class="menu-item has-submenu" id="demo-plugin">
+                                    Demo Plugin
+                                    <span class="submenu-arrow">▶</span>
+                                </div>
+                            </div>
+                            <div class="menu-separator"></div>
+                            <div class="menu-item selected">Launch at Login</div>
+                            <div class="menu-separator"></div>
+                            <div class="menu-item">
+                                <span>Quit KeyBard</span>
+                                <span class="menu-shortcut">⌘Q</span>
+                            </div>
+                        </div>
+
+                        <!-- Presets Submenu -->
+                        <div class="keybard-menu submenu" id="presets-submenu">
+                            <div class="menu-item selected">Sine</div>
+                            <div class="menu-item">Sawtooth</div>
+                        </div>
+                    </div>
+
+                    <!-- Piano Connection -->
+                    <div class="piano-connection">
+                        <div class="connection-line"></div>
+                    </div>
+                    
+                    <!-- Interactive Piano -->
+                    <div class="interactive-piano">
+                        <div class="piano-casing">
+                            <div class="piano-key white" data-note="C4" data-key="a"><span class="key-label">A</span></div>
+                            <div class="piano-key black" data-note="C#4" data-key="w"><span class="key-label">W</span></div>
+                            <div class="piano-key white" data-note="D4" data-key="s"><span class="key-label">S</span></div>
+                            <div class="piano-key black" data-note="D#4" data-key="e"><span class="key-label">E</span></div>
+                            <div class="piano-key white" data-note="E4" data-key="d"><span class="key-label">D</span></div>
+                            <div class="piano-key white" data-note="F4" data-key="f"><span class="key-label">F</span></div>
+                            <div class="piano-key black" data-note="F#4" data-key="t"><span class="key-label">T</span></div>
+                            <div class="piano-key white" data-note="G4" data-key="g"><span class="key-label">G</span></div>
+                            <div class="piano-key black" data-note="G#4" data-key="y"><span class="key-label">Y</span></div>
+                            <div class="piano-key white" data-note="A4" data-key="h"><span class="key-label">H</span></div>
+                            <div class="piano-key black" data-note="A#4" data-key="u"><span class="key-label">U</span></div>
+                            <div class="piano-key white" data-note="B4" data-key="j"><span class="key-label">J</span></div>
+                            <div class="piano-key white" data-note="C5" data-key="k"><span class="key-label">K</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section class="how-it-works">
+            <h2 class="section-title">How It Works</h2>
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-icon">🎵</div>
+                    <h3 class="step-title">1. Choose Instrument</h3>
+                    <p class="step-description">Click the menu bar icon and select any of your installed Audio Unit instrument plugins.</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon">🎹</div>
+                    <h3 class="step-title">2. Select Preset</h3>
+                    <p class="step-description">Hover over your chosen instrument to instantly access and select from all its available presets.</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon">⚡️</div>
+                    <h3 class="step-title">3. Start Playing</h3>
+                    <p class="step-description">That's it. Your MIDI keyboard is now ready to play the selected sound, anytime.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features-section">
+            <h2 class="section-title">Powerful, Not Complicated.</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3 class="feature-title">Universal Compatibility</h3>
+                    <p class="feature-description">Works with all your favorite third-party Audio Unit (AUv3) instrument plugins right out of the box.</p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="feature-title">Remembers Everything</h3>
+                    <p class="feature-description">Automatically saves and reloads your last-used instrument and preset, so your sound is always ready.</p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="feature-title">Always-On Reliability</h3>
+                    <p class="feature-description">Seamlessly handles system sleep, audio device changes, and MIDI keyboard hot-plugging without missing a beat.</p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="feature-title">Lightweight & Native</h3>
+                    <p class="feature-description">Built in Swift for macOS, KeyBard is incredibly efficient and feels right at home on your Mac.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <nav class="footer-nav">
+            <a href="/" class="footer-link">← Back to Home</a>
+        </nav>
+        <p class="copyright">© 2025 Futugora</p>
+    </footer>
+
+    <script src="../../script.js"></script>
+</body>
+</html>

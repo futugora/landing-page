@@ -548,3 +548,409 @@ body {
     color: #ffffff;
     text-decoration: underline;
 }
+
+/* KeyBard Product Page Styles */
+.product-page-body {
+    background: #000000;
+}
+
+.product-page-main {
+    padding-top: 100px;
+}
+
+.product-hero {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 4rem;
+    max-width: 1200px;
+    margin: 4rem auto;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+.product-hero-title {
+    font-size: clamp(4rem, 10vw, 8rem);
+    font-weight: 700;
+    line-height: 1;
+    background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.product-hero-subtitle {
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    color: #cccccc;
+    line-height: 1.6;
+    margin: 2rem 0;
+    max-width: 500px;
+}
+
+.product-hero-cta {
+    margin-top: 2rem;
+}
+
+.app-store-button-large {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.app-store-button-large:hover {
+    transform: translateY(-3px);
+}
+
+.app-store-button-large img {
+    height: 60px;
+    width: auto;
+}
+
+.product-hero-price {
+    color: #888;
+    margin-top: 1rem;
+    font-size: 1rem;
+}
+
+.product-hero-visual {
+    position: relative;
+}
+
+.interactive-demo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.macos-screen {
+    width: 100%;
+    height: 450px;
+    background-image: url(./img/sequoia-bg.png);
+    background-size: cover;
+    background-position: center;
+    border-radius: 24px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+    border: 4px solid #000000;
+    position: relative;
+}
+
+/* macOS Menu Bar */
+.macos-menu-bar {
+    width: 100%;
+    height: 30px;
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 15px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-top-left-radius: 24px;
+    border-top-right-radius: 24px;
+}
+
+#keybard-demo-icon {
+    height: 22px;
+    width: 22px;
+    cursor: pointer;
+    opacity: 0.9;
+    transition: opacity 0.2s ease;
+    margin-right: 15px;
+    position: relative;
+}
+
+#keybard-demo-icon:hover {
+    opacity: 1;
+}
+
+.live-clock {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+/* KeyBard Menu */
+.keybard-menu {
+    position: absolute;
+    top: 35px;
+    right: 50px;
+    width: 240px;
+    background: rgba(40, 40, 40, 0.7);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    padding: 6px;
+    z-index: 100;
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+    transition: opacity 0.15s ease, transform 0.15s ease;
+    pointer-events: none;
+}
+
+.keybard-menu.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+}
+
+.menu-item-group {
+    padding: 2px 0;
+}
+
+.menu-item-header {
+    font-size: 11px;
+    color: #999;
+    padding: 4px 12px;
+    font-weight: 500;
+}
+
+.menu-separator {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.15);
+    margin: 4px 6px;
+}
+
+.menu-item {
+    padding: 5px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    user-select: none;
+    font-size: 14px;
+    display: flex;
+    /* justify-content: space-between; */
+    align-items: center;
+    transition: background 0.1s ease, color 0.1s ease;
+}
+
+.menu-item:has(.menu-shortcut),
+.menu-item:has(.submenu-arrow) {
+    justify-content: space-between;
+}
+
+.menu-item:not(.menu-item-header):not(.menu-separator):hover,
+.menu-item.has-submenu:hover {
+    background: #007aff;
+    color: white;
+}
+
+.menu-item.selected::before {
+    content: '✓';
+    margin-right: 8px;
+    font-weight: 600;
+}
+
+.submenu-arrow {
+    font-size: 14px;
+    margin-left: auto;
+    transform: scaleX(0.7);
+}
+
+/* Submenu */
+.keybard-menu.submenu {
+    width: 120px;
+    top: 62px; /* Position relative to the main menu */
+    right: 295px; /* Position to the left of the main menu */
+}
+
+.menu-shortcut {
+    color: #aaa;
+    font-size: 13px;
+}
+
+.menu-item:hover .menu-shortcut {
+    color: white;
+}
+
+/* Piano Connection */
+.piano-connection {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.connection-line {
+    width: 3px;
+    height: 100%;
+    background: #555;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+/* Interactive Piano */
+.interactive-piano {
+    position: relative;
+    display: flex;
+    height: 150px;
+}
+
+.piano-casing {
+    display: flex;
+    position: relative; /* Required for black key positioning */
+    padding: 15px;
+    background: linear-gradient(to bottom, #444, #222);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5), inset 0 1px 2px rgba(255,255,255,0.1);
+    border: 1px solid rgba(0,0,0,0.5);
+}
+
+.piano-key {
+    position: relative;
+    border: 1px solid #333;
+    cursor: pointer;
+    transition: background 0.05s ease;
+}
+
+.piano-key.white {
+    width: 45px;
+    height: 100%;
+    background: linear-gradient(to bottom, #f8f8f8, #e8e8e8);
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    box-shadow: inset 0 -2px 5px rgba(0,0,0,0.2);
+    z-index: 1; /* White keys are below black keys */
+}
+
+.piano-key.black {
+    width: 28px;
+    height: 60%;
+    background: linear-gradient(to bottom, #222, #000);
+    position: absolute;
+    z-index: 2; /* Black keys are above white keys */
+    border-radius: 0 0 4px 4px;
+    border: 1px solid #000;
+    box-shadow: inset 0 -2px 3px rgba(255,255,255,0.1), 0 2px 3px rgba(0,0,0,0.5);
+    margin-left: 25px; /* Position in the 'crack' */
+}
+
+.piano-key.black:nth-of-type(4) { margin-left: 73px; }
+.piano-key.black:nth-of-type(7) { margin-left: 163px; }
+.piano-key.black:nth-of-type(9) { margin-left: 211px; }
+.piano-key.black:nth-of-type(11) { margin-left: 259px; }
+
+.piano-key.white:active, .piano-key.white.playing {
+    background: #ddd;
+    box-shadow: inset 0 0 2px rgba(0,0,0,0.5);
+}
+
+.piano-key.black:active, .piano-key.black.playing {
+    background: linear-gradient(to bottom, #333, #111);
+    box-shadow: inset -1px 2px rgba(255,255,255,0.1), 0 1px 1px rgba(0,0,0,0.3);
+}
+
+.key-label {
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    color: rgba(0,0,0,0.4);
+    pointer-events: none; /* So they don't interfere with clicks */
+}
+
+.piano-key.black .key-label {
+    color: rgba(255,255,255,0.5);
+    font-size: 9px;
+}
+
+.section-title {
+    text-align: center;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 600;
+    margin-bottom: 4rem;
+    background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.how-it-works {
+    padding: 6rem 2rem;
+    background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+}
+
+.steps-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.step {
+    text-align: center;
+}
+
+.step-icon {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+}
+
+.step-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #ffffff;
+}
+
+.step-description {
+    color: #cccccc;
+    line-height: 1.6;
+}
+
+.features-section {
+    padding: 6rem 2rem;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.feature-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 16px;
+    padding: 2.5rem;
+    backdrop-filter: blur(15px);
+}
+
+.feature-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #ffffff;
+}
+
+.feature-description {
+    color: #cccccc;
+    line-height: 1.6;
+}
+
+@media (max-width: 900px) {
+    .product-hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    .product-hero-content {
+        order: 2;
+    }
+    .product-hero-visual {
+        order: 1;
+        margin-bottom: 3rem;
+    }
+    .product-hero-subtitle {
+        margin: 2rem auto;
+    }
+    .interactive-mockup {
+        transform: none;
+    }
+}
